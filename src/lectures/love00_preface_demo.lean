@@ -2,6 +2,8 @@
 import data.nat.prime
 import tactic.linarith
 
+set_option pp.generalized_field_notation false
+
 /-! # LoVe Preface
 
 ## Proof Assistants
@@ -44,7 +46,7 @@ Research) since 2012.
 
 Its mathematical library, `mathlib`, is developed by a user community.
 
-We use community version 3.20.0. We use its basic libraries, `mathlib`, and
+We use community version 3.43.0. We use its basic libraries, `mathlib`, and
 `LoVelib`. Lean is a research project.
 
 Strengths:
@@ -63,12 +65,12 @@ Strengths:
 
 ### Web Site
 
-    https://cs.brown.edu/courses/cs1951x/
+    https://BrownCS1951x.github.io 
 
 
 ### Repository (Demos, Exercises, Homework)
 
-    https://github.com/BrownCS1951x/fpv2021
+    https://github.com/BrownCS1951x/fpv2022
 
 The file you are currently looking at is a demo. 
 For each chapter of the Hitchhiker's Guide, there will be approximately
@@ -117,4 +119,31 @@ open nat
 open_locale nat
 
 theorem infinitude_of_primes : ∀ N, ∃ p ≥ N, nat.prime p :=
-sorry
+begin 
+  intro N, 
+  let M := N! + 1,
+  let q := min_fac M,
+
+  have hq : nat.prime q := begin 
+    refine min_fac_prime _,
+    have hn : N! > 0 := factorial_pos N,
+    linarith
+  end,
+
+  use q,
+
+  split,
+
+  { by_contradiction,
+    have h1 : q ∣ N! + 1 := min_fac_dvd M,
+    have h1' : q ≤ N := le_of_not_ge h,
+    have h2 : q ∣ N! := (prime.dvd_factorial hq).mpr h1',
+    have h3 : q ∣ 1 := (nat.dvd_add_right h2).mp h1,
+    exact nat.prime.not_dvd_one hq h3 },
+
+  { exact hq },
+end
+
+#print infinitude_of_primes
+
+#eval min_fac 30
