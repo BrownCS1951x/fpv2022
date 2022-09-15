@@ -24,17 +24,17 @@ We will provide details about installing all of these.
 To set up this project, run:
 
 ```bash
-leanproject get BrownCS1951x/fpv2021
-cd fpv2021
+leanproject get BrownCS1951x/fpv2022
+cd fpv2022
 lean --make src/lovelib.lean
 ```
 
 When you open VSCode, make sure that you use the **Open Folder** feature
-to open the entire `fpv2021` directory,
+to open the entire `fpv2022` directory,
 instead of opening individual files. 
 The easiest way to do this is from the command line:
 ```bash
-cd fpv2021
+cd fpv2022
 code .
 ```
 But `File -> Open Folder...` works fine too.
@@ -87,7 +87,7 @@ and run `Lean: Restart`.
 You might find it useful to map this to a hotkey in VSCode. Rob uses `ctrl-r`.
 
 If that doesn't work, let's make sure you have a fresh copy of the library.
-In the root `fpv2021` directory, run:
+In the root `fpv2022` directory, run:
 ```bash
 leanpkg configure
 leanproject get-mathlib
