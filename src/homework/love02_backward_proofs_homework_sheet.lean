@@ -1,4 +1,4 @@
-import ..exercises.love02_backward_proofs_exercise
+import ..exercises.love02_backward_proofs_exercise_sheet
 
 
 /-! # LoVe Homework 2: Backward Proofs
