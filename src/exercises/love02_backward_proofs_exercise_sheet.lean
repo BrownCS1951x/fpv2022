@@ -105,9 +105,9 @@ Hints:
 * If you have a hypothesis `h : a = b` and want to replace `b` with `a` in your
   goal (instead of `a` with `b`), use `rw ←h` (note the `←`).
 -/
-axiom no_odd_doubles : ∀ (n : ℕ), ¬ ∃ (m : ℕ), 2 * n = m + 1
+axiom no_odd_doubles : ∀ (n : ℕ), ¬ ∃ (m : ℕ), 2 * n = 2 * m + 1
 
-lemma t (n : ℕ) : ¬(isEven n ∧ isEven (n + 1)) :=
+lemma no_consecutive_evens (n : ℕ) : ¬(isEven n ∧ isEven (n + 1)) :=
 sorry
 
 end existentials
