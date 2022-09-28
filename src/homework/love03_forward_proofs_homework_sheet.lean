@@ -110,4 +110,21 @@ State it as a lemma and prove it!
 Extra extra challenge: prove it without using `classical.em` or `classical.by_contradiction`.
 -/
 
+/-! ## Question 3 (2 points): Calc Mode
+Use `calc` mode to prove that the difference of squares formula holds on the
+integers. (In this particular problem, working on the integers is necessary, but in
+practice not much different from working on ℕ.)
+You might find some or all of the following subtraction lemmas useful!
+-/
+#check mul_sub
+#check sub_add_eq_sub_sub
+#check sub_self
+#check add_sub_assoc
+#check mul_comm
+#check add_mul
+
+lemma difference_of_squares (a b : ℤ) :
+  (a + b) * (a - b) = a * a - b * b :=
+  sorry
+
 end LoVe
