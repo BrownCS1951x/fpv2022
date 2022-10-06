@@ -46,11 +46,7 @@ the goal (up to computation). -/
 
 lemma fst_of_two_props :
   ∀a b : Prop, a → b → a :=
-fix a b : Prop,
-assume ha : a,
-assume hb : b,
-show a, from
-  ha
+sorry
 
 
 lemma fst_of_two_props₂ (a b : Prop) (ha : a) (hb : b) :
@@ -71,89 +67,45 @@ ha
 
 lemma prop_comp (a b c : Prop) (hab : a → b) (hbc : b → c) :
   a → c :=
-assume ha : a,
-have hb : b :=
-  hab ha,
-have hc : c :=
-  hbc hb,
-show c, from
-  hc
+sorry
 
 lemma prop_comp₂ (a b c : Prop) (hab : a → b) (hbc : b → c) :
   a → c :=
-assume ha : a,
-show c, from
-  hbc (hab ha)
+sorry
 
 
 /-! ## Forward Reasoning about Connectives and Quantifiers -/
 
 lemma and_swap (a b : Prop) :
   a ∧ b → b ∧ a :=
-assume hab : a ∧ b,
-have ha : a :=
-  and.elim_left hab,
-have hb : b :=
-  and.elim_right hab,
-show b ∧ a, from
-  and.intro hb ha
+sorry
 
 lemma or_swap (a b : Prop) :
   a ∨ b → b ∨ a :=
-assume hab : a ∨ b,
-show b ∨ a, from
-  or.elim hab
-    (assume ha : a,
-     show b ∨ a, from
-       or.intro_right b ha)
-    (assume hb : b,
-     show b ∨ a, from
-       or.intro_left a hb)
+sorry
 
 def double (n : ℕ) : ℕ :=
 n + n
 
 lemma nat_exists_double_iden :
   ∃n : ℕ, double n = n :=
-exists.intro 0
-  (show double 0 = 0, from
-     by refl)
+sorry
 
 lemma nat_exists_double_iden₂ :
   ∃n : ℕ, double n = n :=
-exists.intro 0 (by refl)
+sorry
 
 lemma modus_ponens (a b : Prop) :
   (a → b) → a → b :=
-assume hab : a → b,
-assume ha : a,
-show b, from
-  hab ha
+sorry
 
 lemma not_not_intro (a : Prop) :
   a → ¬¬ a :=
-assume ha : a,
-assume hna : ¬ a,
-show false, from
-  hna ha
+sorry
 
 lemma forall.one_point {α : Type} (t : α) (p : α → Prop) :
   (∀x, x = t → p x) ↔ p t :=
-iff.intro
-  (assume hall : ∀x, x = t → p x,
-   show p t, from
-     begin
-       apply hall t,
-       refl
-     end)
-  (assume hp : p t,
-   fix x,
-   assume heq : x = t,
-   show p x, from
-     begin
-       rw heq,
-       exact hp
-     end)
+sorry 
 
 lemma beast_666 (beast : ℕ) :
   (∀n, n = 666 → beast ≥ n) ↔ beast ≥ 666 :=
@@ -163,19 +115,7 @@ forall.one_point _ _
 
 lemma exists.one_point {α : Type} (t : α) (p : α → Prop) :
   (∃x : α, x = t ∧ p x) ↔ p t :=
-iff.intro
-  (assume hex : ∃x, x = t ∧ p x,
-   show p t, from
-     exists.elim hex
-       (fix x,
-        assume hand : x = t ∧ p x,
-        show p t, from
-          by cc))
-  (assume hp : p t,
-   show ∃x : α, x = t ∧ p x, from
-     exists.intro t
-       (show t = t ∧ p t, from
-          by cc))
+sorry
 
 
 /-! ## Calculational Proofs
