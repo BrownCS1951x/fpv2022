@@ -265,6 +265,8 @@ properties. A type can be declared an instance of a type class by providing
 concrete definitions for the constants and proving that the properties hold.
 Based on the type, Lean retrieves the relevant instance. -/
 
+namespace inhabited_examples
+
 #print inhabited
 #check inhabited.default
 
@@ -308,6 +310,8 @@ inductive empty : Type
     [inhabited α] [inhabited β] :
   inhabited (α × β) :=
 { default := (inhabited.default, inhabited.default) }
+
+end inhabited_examples
 
 /-! Here are other type classes without properties: -/
 
