@@ -66,7 +66,7 @@ lemma odd_5 :
 sorry
 
 
-/-! 2.3 (1 point). Prove the same lemma again, but this time in Lean: -/
+/-! 2.3 (1 point). Prove the following lemma in Lean: -/
 
 lemma even_odd {n : ℕ} (heven : even n) :
   odd (n + 1) :=
@@ -83,7 +83,7 @@ sorry
 
 namespace nodup_lists
 
-/-! # Question 3: Duplicate-Free Sublists (6 points)
+/-! ## Question 3 (4 points): Duplicate-Free Sublists
 
 In this problem, we'll use inductive predicates to prove that the sublist of a
 list that contains no duplicates also contains no duplicates. (Informally, a
@@ -114,8 +114,8 @@ And here are some non-examples:
 We'll also need a couple of additional predicates in order to state the desired
 theorem.
 
-1.1 (1 point). Define a predicate `is_in` such that `is_in x xs` holds precisely
-when `x` is an element of `xs`.
+3.1 (1 point). Define a predicate `is_in` such that `is_in x xs` holds precisely
+when `x` is an element of the list `xs`.
 
 Note: you may not use the equality operator `=` in your solution. -/
 
@@ -129,13 +129,23 @@ inductive is_in {α : Type} : α → list α → Prop
 -- `is_in` predicate instead of the default.
 local notation (name := list_in_predicate) x ` ∈ ` xs := is_in x xs
 
-/-! 1.2 (1 point). Define a predicate `no_duplicates` such that
-`no_duplicates xs` holds precisely when `xs` does not contain any duplicate
-elements.
+/-! 3.2 (1 point). Define a predicate `no_duplicates` such that
+`no_duplicates xs` holds precisely when the list `xs` does not contain any
+duplicate elements.
+
+Here are some examples:
+* `no_duplicates []`
+* `no_duplicates [tt]`
+* `no_duplicates [2, 1, 3]`
+
+And here are some non-examples:
+* `¬(no_duplicates [tt, tt])`
+* `¬(no_duplicates [1, 9, 5, 1])`
+* `¬(no_duplicates [3, 1, 4, 1, 5])`
 
 Note: you may not use the equality operator `=` in your solution.
 
-Hint: recall the last predicate! -/
+Hint: you may find the `is_in` (`∈`) predicate you defined above useful! -/
 
 -- Fill this in:
 inductive no_duplicates {α : Type} : list α → Prop
@@ -144,24 +154,15 @@ inductive no_duplicates {α : Type} : list α → Prop
 
 
 
-/-! 1.3 (2 points). Prove the helper lemma `is_in_of_is_in_sublist` below.
+/-! 3.3 (2 points). Equipped with these definitions, prove the theorem we stated
+at the beginning: the sublist of a duplicate-free list is also duplicate-free.
 
-Hint: choose your variable to induct on wisely! There's a solution that doesn't
-require any extra lemmas. But if you're stuck, you might find
-`sublist_of_cons_sublist` useful. -/
+Hint: choose what to induct on wisely! -/
 
-#check @list.sublist_of_cons_sublist
+-- You may find this helper lemma useful when writing your proof.
+axiom not_in_of_not_in_sublist {α : Type} {x : α} {xs ys : list α} :
+  xs <+ ys → ¬(x ∈ ys) → ¬(x ∈ xs)
 
-lemma is_in_of_is_in_sublist {α : Type} :
-  ∀ {x : α} {xs ys : list α}, xs <+ ys → x ∈ xs → x ∈ ys :=
-sorry
-
-
-/-! 1.4 (2 points). Finally, prove the theorem we stated at the beginning: the
-sublist of a duplicate-free list is also duplicate-free. -/
-
--- You may find the following lemma useful (`mt` stands for "modus tollens")
-#check @mt
 
 theorem no_dups_sublist_of_no_dups {α : Type} (xs ys : list α) :
   no_duplicates ys → xs <+ ys → no_duplicates xs :=
@@ -200,7 +201,7 @@ The `repeat n S` statement executes `S` exactly `n` times. Thus, `repeat 5 S`
 has the same effect as `S ;; S ;; S ;; S ;; S` (as far as the big-step semantics
 is concerned), and `repeat 0 S` has the same effect as `skip`.
 
-1.1 (2 points). Complete the following definition of a big-step
+4.1 (2 points). Complete the following definition of a big-step
 semantics: -/
 
 inductive big_step : stmt × state → state → Prop
