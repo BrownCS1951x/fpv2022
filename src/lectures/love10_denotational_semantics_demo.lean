@@ -167,28 +167,21 @@ def monotone {α β : Type} [partial_order α] [partial_order β]
 lemma monotone_id {α : Type} [partial_order α] :
   monotone (λa : α, a) :=
 begin
-  rw monotone,
-  intros a₁ a₂ ha,
-  exact ha
+  sorry
 end
 
 lemma monotone_const {α β : Type} [partial_order α]
     [partial_order β] (b : β) :
   monotone (λ_ : α, b) :=
 begin
-  intros a₁ a₂ ha,
-  simp
+  sorry
 end
 
 lemma monotone_union {α β : Type} [partial_order α]
     (f g : α → set β) (hf : monotone f) (hg : monotone g) :
   monotone (λa, f a ∪ g a) :=
 begin
-  rw monotone,
-  intros a₁ a₂ ha b hb,
-  cases' hb,
-  { exact set.mem_union_left (g a₂) (hf a₁ a₂ ha h) },
-  { exact or.intro_right _ (hg a₁ a₂ ha h) }
+  sorry
 end
 
 /-! We will prove the following two lemmas in the exercise. -/
@@ -300,23 +293,7 @@ complete_lattice.le_Inf _ _ h
 lemma lfp_eq {α : Type} [complete_lattice α] (f : α → α)
     (hf : monotone f) :
   lfp f = f (lfp f) :=
-begin
-  have h : f (lfp f) ≤ lfp f :=
-    begin
-      apply le_lfp,
-      intros a' ha',
-      apply @le_trans _ _ _ (f a'),
-      { apply hf,
-        apply lfp_le,
-        assumption },
-      { assumption }
-    end,
-  apply le_antisymm,
-  { apply lfp_le,
-    apply hf,
-    assumption },
-  { assumption }
-end
+sorry
 
 lemma lfp_least {α : Type} [complete_lattice α] (f : α → α) (X : α) (hX : X = f X) : 
   lfp f ≤ X :=
