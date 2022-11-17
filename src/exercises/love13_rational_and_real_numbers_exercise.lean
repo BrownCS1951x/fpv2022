@@ -19,15 +19,7 @@ Hint: The lemma `fraction.mk.inj_eq` might be useful. -/
 
 lemma fraction.ext (a b : fraction) (hnum : fraction.num a = fraction.num b)
     (hdenom : fraction.denom a = fraction.denom b) :
-  a = b :=
---sol sorry
-begin
-  cases' a,
-  cases' b,
-  rw fraction.mk.inj_eq,
-  exact and.intro hnum hdenom
-end
---los
+  a = b := sorry
 
 /-! 1.2. Extending the `fraction.has_mul` instance from the lecture, declare
 `fraction` as an instance of `semigroup`.
@@ -39,16 +31,7 @@ Hint: Use the lemma `fraction.ext` above, and possibly `fraction.mul_num`, and
 #check fraction.mul_denom
 
 @[instance] def fraction.semigroup : semigroup fraction :=
-{ mul_assoc :=
---sol     sorry,
-    begin
-      intros,
-      apply fraction.ext,
-      repeat {
-        simp [fraction.mul_num, fraction.mul_denom],
-        cc }
-    end,
---los
+{ mul_assoc := sorry
   ..fraction.has_mul }
 
 /-! 1.3. Extending the `rat.has_mul` instance from the lecture, declare `rat` as
@@ -56,17 +39,7 @@ an instance of `semigroup`. -/
 
 @[instance] def rat.semigroup : semigroup rat :=
 { mul_assoc :=
---sol     sorry,
-    begin
-      intros x y z,
-      apply quotient.induction_on x,
-      apply quotient.induction_on y,
-      apply quotient.induction_on z,
-      intros a b c,
-      apply quotient.sound,
-      rw mul_assoc
-    end,
---los
+ sorry
   ..rat.has_mul }
 
 end LoVe
